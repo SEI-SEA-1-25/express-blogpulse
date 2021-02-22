@@ -1,0 +1,7 @@
+npm install
+
+sequelize db:create
+
+sequelize db:seed:all
+\x to improve formatting
+
