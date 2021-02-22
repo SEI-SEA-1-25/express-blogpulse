@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/authors', require('./controllers/authorsController'))
 app.use('/articles', require('./controllers/articlesController'))
-app.use('/comments', require('./controllers/commentsController'))
 
 
 /**
