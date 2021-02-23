@@ -17,10 +17,10 @@ app.use(express.urlencoded({ extended: false }))
  * home route
  */
 
-// GET / - READ all articles and include authors
+// GET / - READ all articles and include authors include tags
 app.get('/', async (req, res) => {
   try {
-    const articles = await db.article.findAll({ include: [db.author, db.comments] })
+    const articles = await db.article.findAll({ include: [db.author, db.comments, db.tag] })
     res.json({ articles: articles })
   } catch(error) {
     console.log(error)
@@ -30,7 +30,7 @@ app.get('/', async (req, res) => {
 
 app.use('/authors', require('./controllers/authorsController'))
 app.use('/articles', require('./controllers/articlesController'))
-
+app.use('/tags', require('./controllers/tagsController'))
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)

@@ -1,0 +1,71 @@
+Deliverable instructions:
+Adding Article Tags to Blog pulse
+There is a new feature request for BlogPulse! You will need to add article 
+tags that user can use to  categorize articles together.
+
+User Stories
+
+* As a user, I would like to assign a tag when I create a new article
+* As a user, I would like to add tags to articles
+* As a user, I would like to see tags displayed on articles
+* As a user, I would like to see one specific tag and all the articles 
+that have been tagged with it
+
+Getting Started
+
+Step 1 Plan your ERD
+
+Use your BlogPulse from today's lab -- check the solution branch/code-along 
+branch for where we left off
+Plan your Database!
+Many articles will have many tags -- how many tables will you need to add
+ to your schema?
+What columns will be needed in the tag table?
+Create an ERD that displays the relationships of your new tables.
+
+Step 2 Plan your routes
+
+Next, plan your routes. What routes will you need to create? Look back 
+on the user stories when planning the routes and the functionality.
+Write out your planned routes along with their HTTP request verbs and 
+CRUD functionality. Look back at the RESTful API spreadsheet for guidance. 
+look at the RESTful api spreadsheet when planning your routes.
+
+Consider the following functionality:
+
+* Showing all articles along with their tags
+* Adding tags when new articles are created
+* Showing a single article along with all of the tags it has
+
+
+* creating an association between and existing tag and an existing article
+
+* Showing all tags available
+* Making a new tag
+* Showing one tag and all the articles that are in it
+
+Examine each item in the list and consider if you will need to modify and 
+existing route or add a new one/
+
+Part 3: Stubbing routes
+
+Using the handy RESTful routing resource document that you just generated, 
+stub those routes! Just use simple responses in your route stubs to ensure 
+that everything is linked up.
+
+Part 4: Adding CRUD functionality
+
+Once your routes are stubbed, and everything is responding to your requests,
+ integrate your model! You can use your testDb.js to write the sequelize 
+ methods for your db CRUD first prior to integrating them into your routes 
+ if you like.
+
+
+Bonuses
+
+* Add the ability to edit and delete tags and articles
+* Add the ability to input and assign multiple tags via a comma separated list.
+
+Example: Inputting node, pizza, music would add all three tags to an article at once.
+Deliverable
+push to github and submit a pull request once you are finished (edited) (edited) 

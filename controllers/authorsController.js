@@ -45,7 +45,7 @@ router.get('/', async (req, res) => {
     }
   })
   
-  // POST /authors/:id/articles - CREATE a new article associated with an author
+  // POST /authors/:id/articles - CREATE a new article associated with an author 
   router.post('/:id/articles', async (req, res) => {
     try {
       const author = await db.author.findByPk(req.params.id, {include: db.article})
