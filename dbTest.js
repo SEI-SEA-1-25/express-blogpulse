@@ -1,3 +1,5 @@
+console.log("henry adding something meaningless so he can turn in the hw")
+
 const db = require('./models')
 
 async function dbTest() {
