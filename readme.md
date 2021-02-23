@@ -248,3 +248,23 @@ Here's an example screenshot of a comment.
 ## Licensing
 1. All content is licensed under a CC-BY-NC-SA 4.0 license.
 2. All software code is licensed under GNU GPLv3. For commercial use or alternative licensing, please contact legal@ga.co.
+
+
+###TODOS
+*As a user, I would like to assign a tag when I create a new article
+ [] update route POST /authort/:id/articles to create tags too
+
+*As a user, I would like to add tags to articles
+ [] new route POSt /articles/:id/tags and create new tag and associate the article
+ [] new route PUT /articles/:articleId/tags/:tagId to associate a tag with an article
+
+*As a user, I would like to see tags displayed on articles
+ [] update GET / to include tags
+ [] update GET /authors/:id to include tags
+ [] update GET /articles/:id to include tags
+
+*As a user, I would like to see one specific tag and all the articles that have been tagged with it
+ [] create tags controller
+ [] new route GET /tags/:id show one tag and all articles
+ [] new route POST /tags create a tag
+ [] new route GET /tags all tags
