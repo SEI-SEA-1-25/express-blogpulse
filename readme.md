@@ -34,7 +34,29 @@ After setup, **STOP**. You're using an existing application, so make sure to rea
 | GET | `/authors/:id` | READS a specific author and their articles |
 | POST | `/authors/:id/articles ` | CREATES a new article, then redirects back to the new article at `GET /articles/:id` |
 | GET | `/articles/:id` | READS a specific article and the author |
-| POST | `/articles/:id/comments` | CREATE a new comment redirect to `/articles/:id`
+|||
+| POST | `/articles/:id/comments` | CREATE a new comment redirect to `/articles/:id` |
+|||
+|||
+
+#### TODOS
+
+[] As a user, I would like to assign a tag when I create a new article
+  * update route POST /articles to include articles
+[] As a user, I would like to add tags to articles
+  * new route POST /articles/:id/tags to create a tag for an article
+  * new route PUT /articles/:id/tags/:id to associate an existing article with an existing tag
+[] As a user, I would like to see tags displayed on articles
+  * update GET / to include tags with articles
+  * update GET  /authors/:id to include tags
+  * update GET /articles/:id to include tags
+[] As a user, I would like to see one specific tag and all the articles that have been tagged with it
+  * new controller tags
+  * new route POST /tags to make a new tag
+  * new route GET /tags/:id to show a tag and all associated articles
+
+
+
 [Here](https://www.getpostman.com/collections/dc8731aace792e95b8ef) is a link to the postman.app collection the last engineer was using to test the API routes.
 
 #### Models
