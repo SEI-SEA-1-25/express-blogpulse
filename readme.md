@@ -37,6 +37,12 @@ After setup, **STOP**. You're using an existing application, so make sure to rea
 
 [Here](https://www.getpostman.com/collections/dc8731aace792e95b8ef) is a link to the postman.app collection the last engineer was using to test the API routes.
 
+User Stories
+* As a user, I would like to assign a tag when I create a new article
+* As a user, I would like to add tags to articles
+* As a user, I would like to see tags displayed on articles
+* As a user, I would like to see one specific tag and all the articles that have been tagged with it
+
 #### Models
   
   * `author`
