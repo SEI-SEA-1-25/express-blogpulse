@@ -32,29 +32,16 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// create a new article associated with a tag
-router.post("/:id/articles", async (req, res) => {
+// read all tags
+
+router.get("/", async (req, res) => {
   try {
-    const tag = await db.tag.findByPk(req.params.id, { include: db.article });
-    if (!tag) throw new Error("tag not found");
-    const article = await db.article.create({
-      name: req.body.name,
-    });
-    await author.addArticle(article);
-    res.redirect(`/tags/${req.params.id}`);
+    const tags = await db.tag.findAll();
+    res.json({ tags: tags });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "bad request" });
   }
-}) /
-  router.get("/", async (req, res) => {
-    try {
-      const tags = await db.tag.findAll();
-      res.json({ tags: tags });
-    } catch (error) {
-      console.log(error);
-      res.status(400).json({ message: "bad request" });
-    }
-  });
+});
 
 module.exports = router;

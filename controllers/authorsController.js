@@ -36,7 +36,9 @@ router.get("/:id", async (req, res) => {
   try {
     const author = await db.author.findOne({
       where: { id: req.params.id },
-      include: [db.article],
+      include: [{
+        model: db.article, 
+        include: db.tag}],
     });
     res.json({ author: author });
   } catch (error) {
@@ -49,13 +51,17 @@ router.get("/:id", async (req, res) => {
 router.post("/:id/articles", async (req, res) => {
   try {
     const author = await db.author.findByPk(req.params.id, {
-      include: db.article,
+      include: db.article
     });
     if (!author) throw new Error("author not found");
     const article = await db.article.create({
       title: req.body.title,
       content: req.body.content,
     });
+    const tag = await db.tag.create({
+      name: req.body.tagName,
+    })
+    await author.addTag(tag);
     await author.addArticle(article);
     res.redirect(`/authors/${req.params.id}`);
   } catch (error) {
