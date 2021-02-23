@@ -22,4 +22,16 @@ async function createTag() {
     console.log("🌍 🌍 🌍", err);
   }
 }
-createTag();
+// createTag();
+
+async function findTags() {
+  try {
+    const article = await db.article.findByPk(1, {
+      include: [db.tag],
+    });
+    console.log(article);
+  } catch (err) {
+    console.log("🌍 🌍 🌍", err);
+  }
+}
+// findTags();
