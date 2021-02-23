@@ -2,7 +2,7 @@ const router = require('express').Router()
 const db = require('../models')
 
 // GET /tags - READ all tags
-// Showing all tags available
+// 5
 router.get('/', async (req, res) => {
     try {
       const tags = await db.tag.findAll()
@@ -13,7 +13,8 @@ router.get('/', async (req, res) => {
     }
   })
   
-  // POST /tags - CREATE a new tag
+  // POST /tags - CREATE a new tag 
+  //6
   router.post('/', async (req, res) => {
     try {
       const newTag = await db.tag.create({
@@ -28,7 +29,7 @@ router.get('/', async (req, res) => {
 
   
   // GET /tag/:id - READ a specific tag and inlcude their articles
-  //Showing one tag and all the articles that are in it
+  //7
   router.get('/:id', async (req, res) => {
     try {
       const tag = await db.tag.findOne({

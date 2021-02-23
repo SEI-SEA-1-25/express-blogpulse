@@ -17,7 +17,8 @@ app.use(express.urlencoded({ extended: false }))
  * home route
  */
 
-// GET / - READ all articles and include authors include tags
+// GET / - READ all articles and include authors include tags 
+
 app.get('/', async (req, res) => {
   try {
     const articles = await db.article.findAll({ include: [db.author, db.comments, db.tag] })
