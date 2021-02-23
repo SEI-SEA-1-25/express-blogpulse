@@ -35,4 +35,14 @@ router.post('/:id/comments', async (req, res) => {
   }
 })
 
+//  POST /articles/:id/tags - CREATE a new tag
+router.post('/:id/tags', (req, res) => {
+  res.json({ message: 'add tag to article 🏷' })
+})
+
+// PUT /articles/:articleId/tags/:tagId - associate a tag to an article
+router.put('/:id/tags/:id', (req, res) => {
+  res.json({ message: 'associate an article to a tag 🏷' })
+})
+
 module.exports = router
