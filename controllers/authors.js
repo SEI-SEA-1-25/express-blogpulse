@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const db = require('../models')
 
+
+
 // GET /authors - READ all authors
 router.get('/', async (req, res) => {
     try {
