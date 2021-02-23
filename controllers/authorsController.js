@@ -51,17 +51,25 @@ router.get("/:id", async (req, res) => {
 router.post("/:id/articles", async (req, res) => {
   try {
     const author = await db.author.findByPk(req.params.id, {
-      include: db.article
+      include: [db.article]
     });
     if (!author) throw new Error("author not found");
     const article = await db.article.create({
       title: req.body.title,
       content: req.body.content,
     });
-    const tag = await db.tag.create({
-      name: req.body.tagName,
+    // const tag = await db.tag.create({
+    //   name: req.body.tagName,
+    // })
+    // await article.addTag(tag);
+    let tags = req.body.tags.split(',')
+    console.log(tags)
+    tags = tags.map(async tag => {
+      return await article.createTag({
+        name: tag
+      })
     })
-    await author.addTag(tag);
+    await Promise.allTags
     await author.addArticle(article);
     res.redirect(`/authors/${req.params.id}`);
   } catch (error) {
