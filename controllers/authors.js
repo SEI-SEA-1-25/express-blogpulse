@@ -1,16 +1,14 @@
 const router = require('express').Router()
 const db = require('../models')
 
-/**
- * /authors routes
- */
+
 
 // GET /authors - READ all authors
 router.get('/', async (req, res) => {
   try {
     const authors = await db.author.findAll()
     res.json({ authors: authors })
-  } catch(error) {
+  } catch (error) {
     console.log(error)
     res.status(400).json({ message: 'bad request' })
   }
@@ -25,7 +23,7 @@ router.post('/', async (req, res) => {
       bio: req.body.bio
     })
     res.redirect(`/authors/${newAuthor.id}`)
-  } catch(error) {
+  } catch (error) {
     console.log(error)
     res.status(400).json({ message: 'bad request' })
   }
@@ -35,11 +33,11 @@ router.post('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const author = await db.author.findOne({
-      where: {id: req.params.id},
+      where: { id: req.params.id },
       include: [db.article]
     })
     res.json({ author: author })
-  } catch(error) {
+  } catch (error) {
     console.log(error)
     res.status(400).json({ message: 'bad request' })
   }
@@ -48,15 +46,15 @@ router.get('/:id', async (req, res) => {
 // POST /authors/:id/articles - CREATE a new article associated with an author
 router.post('/:id/articles', async (req, res) => {
   try {
-    const author = await db.author.findByPk(req.params.id, {include: db.article})
-    if(!author) throw new Error('author not found')
+    const author = await db.author.findByPk(req.params.id, { include: db.article })
+    if (!author) throw new Error('author not found')
     const article = await db.article.create({
       title: req.body.title,
       content: req.body.content,
     })
     await author.addArticle(article)
     res.redirect(`/authors/${req.params.id}`)
-  } catch(error) {
+  } catch (error) {
     console.log(error)
     res.status(400).json({ message: 'bad request' })
   }

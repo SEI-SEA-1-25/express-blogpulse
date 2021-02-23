@@ -1,16 +1,14 @@
-const db = require('./models')
-
+const db = require("./models");
 async function dbTest() {
-  const article = await db.article.findOne()
+  const article = await db.article.findOne();
   const comment = await db.comment.create({
-    name: 'Paul Allen',
-    content: 'This is really neat! Thanks for posting.',
-    articleId: article.id
-  })
-  console.log(comment)
+    name: "Paul Allen",
+    comment: "This is really neat! Thanks for posting.",
+    articleId: article.id,
+  });
+  console.log(comment);
 }
-
-// dbTest()
+// dbTest();
 
 async function createTag() {
   try {
@@ -19,7 +17,7 @@ async function createTag() {
     })
     const article = await db.article.findOne()
     await article.addTag(newTag)
-  } catch(error) {
+  } catch (error) {
     console.log(error)
   }
 }
@@ -31,10 +29,8 @@ async function findTags() {
     const article = await db.article.findByPk(1, {
       include: [db.tag]
     })
-
     console.log(article)
-
-  } catch(error) {
+  } catch (error) {
     console.log(error)
   }
 }
