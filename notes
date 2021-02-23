@@ -1,0 +1,9 @@
+need to set up routes
+
+article id in the comments
+article where the comment belongs to
+one article will have many comments
+
+refactor code into correct locations
+
+put things into controllers
