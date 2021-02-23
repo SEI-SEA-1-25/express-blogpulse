@@ -5,3 +5,6 @@ sequelize db:create
 sequelize db:seed:all
 \x to improve formatting
 
+sequelize model:generate --name=tag --attributes name:text
+sequelize model:generate --name=articles_tags --attributes articleId:integer,tagId:integer
+
