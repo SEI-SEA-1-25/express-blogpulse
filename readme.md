@@ -45,13 +45,14 @@ After setup, **STOP**. You're using an existing application, so make sure to rea
   [x] update GET / to include tags with articles
   [x] update GET  /authors/:id to include tags
   [x] update GET /articles/:id to include tags
-[] As a user, I would like to assign a tag when I create a new article
-  [] update route POST /articles to include tags
-[] As a user, I would like to add tags to articles
-  [] new route POST /articles/:id/tags to create a tag for an article
-  [] new route PUT /articles/:id/tags/:id to associate an existing article with an existing tag
+[x] As a user, I would like to assign a tag when I create a new article
+  [x] update route POST /articles to include tags
+[x] As a user, I would like to add tags to articles
+  [x] new route POST /articles/:id/tags to create a tag for an article
+  [x] new route PUT /articles/:id/tags/:id to associate an existing article with an existing tag
 [] As a user, I would like to see one specific tag and all the articles that have been tagged with it
-  [] new controller tags
+  [x] new controller tags
+  [x] new route GET /tags READ all tags
   [] new route POST /tags to make a new tag
   [] new route GET /tags/:id to show a tag and all associated articles
 
