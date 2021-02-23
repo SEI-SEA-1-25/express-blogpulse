@@ -9,5 +9,17 @@ async function dbTest() {
   });
   console.log(comment);
 }
+// dbTest();
 
-dbTest();
+async function createTag() {
+  try {
+    const newTag = await db.tag.create({
+      name: "pizza",
+    });
+    const article = await db.article.findOne();
+    await article.addTag(newTag);
+  } catch (err) {
+    console.log("🌍 🌍 🌍", err);
+  }
+}
+createTag();
