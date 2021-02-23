@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/authors', require('./controllers/authorsController'))
 app.use('/articles', require('./controllers/articlesController'))
+app.use('/tags', require('./controllers/tagsController'))
 
 
 /**
@@ -24,7 +25,7 @@ app.use('/articles', require('./controllers/articlesController'))
 // GET / - READ all articles and include authors
 app.get('/', async (req, res) => {
   try {
-    const articles = await db.article.findAll({ include: [db.author, db.comment] })
+    const articles = await db.article.findAll({ include: [db.author, db.comment, db.tag] })
     res.json({ articles: articles })
   } catch(error) {
     console.log(error)

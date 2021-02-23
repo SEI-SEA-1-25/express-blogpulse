@@ -8,3 +8,7 @@ sequelize db:seed:all
 sequelize model:generate --name=tag --attributes name:text
 sequelize model:generate --name=articles_tags --attributes articleId:integer,tagId:integer
 
+As a user, I would like to assign a tag when I create a new article
+As a user, I would like to add tags to articles
+As a user, I would like to see tags displayed on articles
+As a user, I would like to see one specific tag and all the articles that have been tagged with it
