@@ -5,8 +5,12 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class article extends Model {
     static associate(models) {
+      // models.article.hasMany(models.comment)
       models.article.belongsTo(models.author)
-    }
+      models.article.belongsToMany(models.tag, { 
+        through: 'articles_tags' 
+      })
+    }  
   };
   article.init({
     title: DataTypes.STRING,
