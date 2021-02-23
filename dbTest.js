@@ -31,9 +31,7 @@ async function findTags() {
     const article = await db.article.findByPk(1, {
       include: [db.tag]
     })
-
     console.log(article)
-
   } catch(error) {
     console.log(error)
   }

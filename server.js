@@ -31,6 +31,7 @@ app.get('/', async (req, res) => {
 // controllers
 app.use('/authors', require('./controllers/authors'))
 app.use('/articles', require('./controllers/articles'))
+app.use('/tags', require('./controllers/tags'))
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`)
