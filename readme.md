@@ -2,16 +2,12 @@
 # **;)-**
 ## **Blog** Exercize
 
-
-
-
-
+### attempting to understand
 ![ExampleComments](sprdSht.png)
-## A
 
+
+#### Model with- **comments** -applied
 ![ExampleComments](addComments.png)
 
-
-
-## B
+#### Model w/tags applied
 ![ExampleComments](withTags.png)
