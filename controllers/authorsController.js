@@ -58,10 +58,20 @@ router.get('/', async (req, res) => {
         title: req.body.title,
         content: req.body.content,
       })
-      const tag = await db.tag.create({
-        name: req.body.tagName
+      // const tag = await db.tag.create({
+      //   name: req.body.tagName
+      // })
+      // split on commas
+      let tags = req.body.tags.split(',')
+      // create tags and associtations 
+      tags = tags.map(async tag => {
+        return await article.createTag({
+          name: tag
+        })
       })
-      await article.addTag(tag)
+      //wait for all db operations to complete 
+      await Promise.all(tags)
+      // await article.addTag(tag)
       await author.addArticle(article)
       res.redirect(`/authors/${req.params.id}`)
     } catch(error) {
