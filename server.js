@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }))
 // GET / - READ all articles and include authors
 app.get('/', async (req, res) => {
   try {
-    const articles = await db.article.findAll({ include: [db.author] })
+    const articles = await db.article.findAll({ include: [db.author, db.tag] })
     res.json({ articles: articles })
   } catch(error) {
     console.log(error)

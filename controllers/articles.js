@@ -10,7 +10,7 @@ router.get('/:id', async (req, res) => {
   try {
     const article = await db.article.findOne({
       where: { id: req.params.id },
-      include: [db.author, db.comment]
+      include: [db.tag, db.author, db.comment]
     })
     res.json({ article: article })
   } catch(error) {

@@ -36,7 +36,11 @@ router.get('/:id', async (req, res) => {
   try {
     const author = await db.author.findOne({
       where: {id: req.params.id},
-      include: [db.article]
+      // include: { all: true, nested: true }
+      include: [{
+        model: db.article,
+        include: db.tag
+      }]
     })
     res.json({ author: author })
   } catch(error) {
@@ -48,14 +52,21 @@ router.get('/:id', async (req, res) => {
 // POST /authors/:id/articles - CREATE a new article associated with an author
 router.post('/:id/articles', async (req, res) => {
   try {
-    const author = await db.author.findByPk(req.params.id, {include: db.article})
+    const author = await db.author.findByPk(req.params.id, {include: [db.article]})
     if(!author) throw new Error('author not found')
     const article = await db.article.create({
       title: req.body.title,
       content: req.body.content,
     })
     await author.addArticle(article)
-    res.redirect(`/authors/${req.params.id}`)
+    // only create a tag if included in the req.body
+    if(req.body.tag) {
+      const tag = await db.tag.create({
+        name: req.body.tag
+      }) 
+      await article.addTag(tag)
+    }
+    res.redirect(`/articles/${article.id}`)
   } catch(error) {
     console.log(error)
     res.status(400).json({ message: 'bad request' })
