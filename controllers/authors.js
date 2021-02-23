@@ -61,11 +61,24 @@ router.post('/:id/articles', async (req, res) => {
     await author.addArticle(article)
     // only create a tag if included in the req.body
     if(req.body.tag) {
-      const tag = await db.tag.create({
-        name: req.body.tag
-      }) 
-      await article.addTag(tag)
+      // mvp way to add tags
+      // const tag = await db.tag.create({
+      //   name: req.body.tag
+      // }) 
+      // await article.addTag(tag)
+      // stretch goal -- tags in comma separated list
+      // split tags at commas
+      let tags = req.body.tag.split(',')
+      // map promises to an array
+      tags = tags.map(async tag => {
+        return await article.createTag({
+          name: tag.trim() // trim white space
+        })
+      })
+      // await all promises
+      await Promise.all(tags)
     }
+
     res.redirect(`/articles/${article.id}`)
   } catch(error) {
     console.log(error)
