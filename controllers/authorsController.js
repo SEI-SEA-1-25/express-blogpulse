@@ -31,12 +31,16 @@ router.get('/', async (req, res) => {
     }
   })
   
-  // GET /authors/:id - READ a specific author and inlcude their articles
+  // GET /authors/:id - READ a specific author and inlcude their articles(which include tags)
   router.get('/:id', async (req, res) => {
     try {
       const author = await db.author.findOne({
         where: {id: req.params.id},
-        include: [db.article]
+        // include: [db.article, db.tag]
+        include: [{
+          model: db.article,
+          include: db.tag
+        }]
       })
       res.json({ author })
     } catch(error) {
@@ -54,6 +58,10 @@ router.get('/', async (req, res) => {
         title: req.body.title,
         content: req.body.content,
       })
+      const tag = await db.tag.create({
+        name: req.body.tagName
+      })
+      await article.addTag(tag)
       await author.addArticle(article)
       res.redirect(`/authors/${req.params.id}`)
     } catch(error) {
