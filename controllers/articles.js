@@ -10,7 +10,7 @@ router.get("/:id", async (req, res) => {
   try {
     const article = await db.article.findOne({
       where: { id: req.params.id },
-      include: [db.author, db.comment],
+      include: [db.author, db.comment, db.tag],
     });
     res.json({ article: article });
   } catch (error) {
@@ -28,6 +28,24 @@ router.post("/:id/comments", async (req, res) => {
       comment: req.body.comment,
     });
 
+    res.redirect(`/articles/${req.params.id}`);
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ message: "bad request" });
+  }
+});
+
+//POST /articles/:id/tags - create a new tag to existing article
+router.post("/:id/tags", async (req, res) => {
+  try {
+    const article = await db.article.findByPk(req.params.id, {
+      include: db.tag,
+    });
+    if (!article) throw new Error("article not found");
+    const tag = await db.tag.create({
+      name: req.body.name,
+    });
+    await article.addTag(tag);
     res.redirect(`/articles/${req.params.id}`);
   } catch (error) {
     console.log(error);

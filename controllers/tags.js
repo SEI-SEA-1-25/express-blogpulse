@@ -2,62 +2,62 @@ const router = require("express").Router();
 const db = require("../models");
 
 /**
- * /authors routes
+ * /tags routes
  */
 
-// GET /authors - READ all authors
+// GET /tags - READ all tags
 router.get("/", async (req, res) => {
   try {
-    const authors = await db.author.findAll();
-    res.json({ authors: authors });
+    const tags = await db.tag.findAll();
+    res.json({ tags: tags });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "bad request" });
   }
 });
 
-// POST /authors - CREATE a new author
+// POST /tags - CREATE a new tag
 router.post("/", async (req, res) => {
   try {
-    const newAuthor = await db.author.create({
+    const newTag = await db.tag.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       bio: req.body.bio,
     });
-    res.redirect(`/authors/${newAuthor.id}`);
+    res.redirect(`/tags/${newTag.id}`);
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "bad request" });
   }
 });
 
-// GET /authors/:id - READ a specific author and includes their articles
+// GET /tags/:id - READ a specific tag and includes their articles
 router.get("/:id", async (req, res) => {
   try {
-    const author = await db.author.findOne({
+    const tag = await db.tag.findOne({
       where: { id: req.params.id },
       include: [db.article],
     });
-    res.json({ author: author });
+    res.json({ tag: tag });
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "bad request" });
   }
 });
 
-// POST /authors/:id/articles - CREATE a new article associated with an author
+// POST /tags/:id/articles - CREATE a new article associated with an tag
 router.post("/:id/articles", async (req, res) => {
   try {
-    const author = await db.author.findByPk(req.params.id, {
+    const tag = await db.tag.findByPk(req.params.id, {
       include: db.article,
     });
-    if (!author) throw new Error("author not found");
+    if (!tag) throw new Error("tag not found");
     const article = await db.article.create({
       title: req.body.title,
       content: req.body.content,
     });
-    await author.addArticle(article);
-    res.redirect(`/authors/${req.params.id}`);
+    await tag.addArticle(article);
+    res.redirect(`/tags/${req.params.id}`);
   } catch (error) {
     console.log(error);
     res.status(400).json({ message: "bad request" });
